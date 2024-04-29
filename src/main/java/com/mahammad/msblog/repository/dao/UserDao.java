@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -51,6 +52,8 @@ public class UserDao implements UserDetails {
     private Integer createdBy;
 
     private Integer updatedBy;
+
+    private java.sql.Date birthDate;
 
     private boolean accountBlocked;
 

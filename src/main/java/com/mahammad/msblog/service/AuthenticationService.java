@@ -9,23 +9,18 @@ import com.mahammad.msblog.repository.UserRepository;
 import com.mahammad.msblog.repository.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.sql.Date;
-import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
 
     private final UserRepository repository;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
+//    private final AuthenticationManager authenticationManager;
     private final AuthenticationMapper authenticationMapper;
 
     public AuthenticationResponse registerUser(UserRegisterRequest userRegisterRequest) {
@@ -34,16 +29,7 @@ public class AuthenticationService {
             throw new UserAlreadyExistsException(ErrorCode.USER_ALREADY_EXISTS, "User already exists with this email");
         }
 
-        UserDao userDao = authenticationMapper.toUserDao(userRegisterRequest);
-
-        LocalDate birthDate = userRegisterRequest.getBirthDate();
-        if (birthDate != null) {
-            userDaoBuilder.birthDate(Date.valueOf(birthDate));
-        } else {
-            userDaoBuilder.birthDate(null);
-        }
-
-        UserDao user = userDaoBuilder.build();
+        UserDao user = authenticationMapper.toUserDao(userRegisterRequest);
 
         repository.save(user);
         var jwtToken = jwtService.generateToken(user);

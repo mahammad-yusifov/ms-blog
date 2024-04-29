@@ -1,8 +1,12 @@
 package com.mahammad.msblog.mapper;
 
+import com.mahammad.msblog.model.request.UserRegisterRequest;
+import com.mahammad.msblog.repository.dao.UserDao;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AuthenticationMapper {
 
+    UserDao toUserDao(UserRegisterRequest userRegisterRequest);
 }
