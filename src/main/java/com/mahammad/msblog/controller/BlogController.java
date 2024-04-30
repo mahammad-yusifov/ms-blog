@@ -1,9 +1,14 @@
 package com.mahammad.msblog.controller;
 
+import java.awt.print.Pageable;
 import java.util.List;
+
+import com.mahammad.msblog.model.request.AddCommentRequest;
 import com.mahammad.msblog.model.request.PostBlogRequest;
 import com.mahammad.msblog.model.response.AuthenticationResponse;
 import com.mahammad.msblog.model.response.BlogResponse;
+import com.mahammad.msblog.repository.blog.BlogCommentDao;
+import com.mahammad.msblog.repository.blog.BlogDao;
 import com.mahammad.msblog.service.BlogService;
 import com.turkraft.springfilter.boot.Filter;
 import lombok.RequiredArgsConstructor;
@@ -27,26 +32,28 @@ public class BlogController {
     private final BlogService blogService;
 
     @PostMapping()
-    public ResponseEntity<BlogResponse> postBlog(@RequestBody PostBlogRequest postBlogRequest,
-                                                 @RequestHeader("Authorization") String authorizationHeader) {
-        log.debug("post blog for {} start", userId);
-        AuthenticationResponse postBlogResponse = blogService.postBlog(postBlogRequest, authorizationHeader);
-        log.debug("post blog for {} end", userId);
+    public ResponseEntity<BlogDao> postBlog(@RequestBody PostBlogRequest postBlogRequest,
+                                            @RequestHeader("Authorization") String authorizationHeader) {
+        BlogDao postBlogResponse = blogService.postBlog(postBlogRequest, authorizationHeader);
         return ResponseEntity.ok(postBlogResponse);
     }
 
-    @GetMapping()
-    public ResponseEntity<BlogResponse> getBlog(@PathVariable Long blogId,
-                                                 @RequestHeader("Authorization") String authorizationHeader) {
-        log.debug("get full blog for {} start", userId);
-        AuthenticationResponse postBlogResponse = blogService.getBlog(blogId, authorizationHeader);
-        log.debug("get full blog for {} end", userId);
-        return ResponseEntity.ok(postBlogResponse);
+    @GetMapping("/{blogId}")
+    public ResponseEntity<BlogDao> getBlog(@PathVariable Long blogId) {
+        BlogDao getBlogDao = blogService.getBlog(blogId);
+        return ResponseEntity.ok(getBlogDao);
     }
 
-    @GetMapping(value = "/all")
-    public List<BlogResponse> search(@Filter Specification<BlogResponse> specification) {
-        return blogService.filterBlogs(specification);
+    @GetMapping(value = "/filter")
+    public List<BlogDao> filter(@Filter Specification<BlogDao> specification, Pageable pageable) {
+        return blogService.filterBlogs(specification, pageable);
+    }
+
+    @PostMapping("/comment")
+    public ResponseEntity<BlogCommentDao> addComment(@RequestBody AddCommentRequest addCommentRequest,
+                                                     @RequestHeader("Authorization") String authorizationHeader) {
+        BlogCommentDao addCommentResponse = blogService.addComment(addCommentRequest, authorizationHeader);
+        return ResponseEntity.ok(addCommentResponse);
     }
 
 }

@@ -29,9 +29,6 @@ public class BlogCommentDao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long blogId;
-
     private String comment;
 
     @CreationTimestamp

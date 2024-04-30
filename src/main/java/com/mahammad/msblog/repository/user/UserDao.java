@@ -19,7 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "customer", schema = "ms-blog")
+@Table(name = "user", schema = "ms-blog")
 public class UserDao implements UserDetails {
 
     @Id
@@ -39,7 +39,7 @@ public class UserDao implements UserDetails {
 
     private String email;
 
-    private Integer userTypeId;
+    private Long userTypeId;
 
     @CreationTimestamp
     private Date createdAt;

@@ -21,4 +21,6 @@ public interface JwtService {
     String extractUsername(String token);
 
     Date extractExpiration(String token);
+
+    String extractToken(String authorizationHeader);
 }

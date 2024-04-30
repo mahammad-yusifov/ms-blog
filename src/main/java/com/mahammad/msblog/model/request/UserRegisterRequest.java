@@ -2,9 +2,7 @@ package com.mahammad.msblog.model.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.mahammad.msblog.util.SqlDateDeserializer;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 

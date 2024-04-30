@@ -64,4 +64,7 @@ public class BlogDao {
 
     @OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<BlogCommentDao> comments;
+
+    @OneToMany(mappedBy = "blog", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<BlogImageDao> images;
 }

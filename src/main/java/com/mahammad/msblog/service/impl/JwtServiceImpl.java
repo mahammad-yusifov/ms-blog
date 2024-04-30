@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+
 import com.mahammad.msblog.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    private static final long EXPIRATION_TIME = 5 * 60 * 1000L; // 5 minutes
+    private static final long EXPIRATION_TIME = 120 * 60 * 1000L; // 2 hour for testing
     @Value("${jwt.secret-key}")
     private String SECRET_KEY;
 
@@ -77,5 +78,13 @@ public class JwtServiceImpl implements JwtService {
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    @Override
+    public String extractToken(String authorizationHeader) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7);
+        }
+        throw new IllegalArgumentException("Invalid Authorization header format");
     }
 }
