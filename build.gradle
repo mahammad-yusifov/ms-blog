@@ -28,6 +28,7 @@ dependencies {
     implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '8.0.0.Final'
     implementation 'org.mapstruct:mapstruct:1.5.2.Final'
     implementation 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+    implementation group: 'com.turkraft', name: 'spring-filter', version: '2.1.6'
 
     compileOnly 'org.projectlombok:lombok'
 

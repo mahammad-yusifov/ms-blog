@@ -1,4 +1,4 @@
-package com.mahammad.msblog.repository.dao;
+package com.mahammad.msblog.repository.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class UserDao implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "username")
     private String userName;
@@ -49,9 +49,9 @@ public class UserDao implements UserDetails {
 
     private Boolean status = true;
 
-    private Integer createdBy;
+    private Long createdBy;
 
-    private Integer updatedBy;
+    private Long updatedBy;
 
     private java.sql.Date birthDate;
 

@@ -1,6 +1,5 @@
-package com.mahammad.msblog.repository;
+package com.mahammad.msblog.repository.user;
 
-import com.mahammad.msblog.repository.dao.UserDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

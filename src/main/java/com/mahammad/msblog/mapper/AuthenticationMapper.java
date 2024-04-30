@@ -1,7 +1,7 @@
 package com.mahammad.msblog.mapper;
 
 import com.mahammad.msblog.model.request.UserRegisterRequest;
-import com.mahammad.msblog.repository.dao.UserDao;
+import com.mahammad.msblog.repository.user.UserDao;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
