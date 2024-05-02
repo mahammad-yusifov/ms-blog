@@ -18,5 +18,5 @@ public interface BlogService {
 
     BlogCommentDao addComment(AddCommentRequest addCommentRequest, String header);
 
-    List<BlogDao> filterBlogs(Specification<BlogDao> specification, Pageable pageable);
+    List<BlogDao> filterBlogs(String searchQuery);
 }

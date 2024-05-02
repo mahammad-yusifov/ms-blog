@@ -3,6 +3,8 @@ package com.mahammad.msblog.service.impl;
 import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.mahammad.msblog.mapper.BlogMapper;
 import com.mahammad.msblog.model.request.AddCommentRequest;
@@ -14,6 +16,7 @@ import com.mahammad.msblog.repository.blog.BlogDao;
 import com.mahammad.msblog.repository.blog.BlogRepository;
 import com.mahammad.msblog.repository.user.UserDao;
 import com.mahammad.msblog.service.BlogService;
+import com.mahammad.msblog.specification.BlogSpecificationsBuilder;
 import com.mahammad.msblog.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -49,8 +52,16 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogDao> filterBlogs(Specification<BlogDao> specification, Pageable pageable) {
-//        return blogRepository.findAll(specification, pageable);
-        return null;
+    public List<BlogDao> filterBlogs(String searchQuery) {
+
+        BlogSpecificationsBuilder builder = new BlogSpecificationsBuilder();
+        Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+        Matcher matcher = pattern.matcher(searchQuery + ",");
+        while (matcher.find()) {
+            builder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+        }
+
+        Specification<BlogDao> spec = builder.build();
+        return blogRepository.findAll(spec);
     }
 }

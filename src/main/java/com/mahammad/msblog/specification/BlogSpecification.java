@@ -5,9 +5,14 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor
 public class BlogSpecification implements Specification<BlogDao> {
+
     private SearchCriteria criteria;
 
     @Override
