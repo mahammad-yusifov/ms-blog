@@ -50,6 +50,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<BlogDao> filterBlogs(Specification<BlogDao> specification, Pageable pageable) {
-        return blogRepository.findAll(specification, pageable);
+//        return blogRepository.findAll(specification, pageable);
+        return null;
     }
 }

@@ -10,9 +10,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface BlogMapper {
 
+    @Mapping(target = "name", source = "user.name")
     BlogDao toBlogDao(PostBlogRequest postBlogRequest, UserDao user);
 
     BlogCommentDao toBlogCommentDao(AddCommentRequest addCommentRequest, UserDao user);

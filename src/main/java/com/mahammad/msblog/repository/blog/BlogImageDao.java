@@ -24,8 +24,8 @@ public class BlogImageDao {
 
     private String filePath;
 
-    @Column(nullable = false)
-    private Long blogId;
+//    @Column(nullable = false)
+//    private Long blogId;
 
     private String altText;
 

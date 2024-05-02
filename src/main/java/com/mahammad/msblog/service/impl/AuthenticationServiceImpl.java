@@ -15,6 +15,7 @@ import com.mahammad.msblog.service.AuthenticationService;
 import com.mahammad.msblog.service.JwtService;
 import com.mahammad.msblog.util.Util;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService{
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
